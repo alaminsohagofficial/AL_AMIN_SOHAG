@@ -3,15 +3,15 @@
 Strategic Researcher | Founder of Salsabilah Amin Empires  
 Developer of "Digit Theory"
 
-Welcome to my official GitHub research repository.
+Welcome to the official GitHub research repository of MD. Al Amin Sohag.
 
 ---
 
 ## About
 
-I am an independent strategic researcher focused on industrial resilience, digital infrastructure, and next-generation economic systems.
+MD. Al Amin Sohag is an independent strategic researcher focused on industrial resilience, digital infrastructure, and next-generation economic systems.
 
-My work explores mathematical frameworks, strategic logistics models, and digital economic structures designed to support large-scale business and technological ecosystems.
+His work explores mathematical frameworks, strategic logistics models, and digital economic structures designed to support large-scale business and technological ecosystems.
 
 ---
 
@@ -48,7 +48,7 @@ Reg No: 018923558
 
 ## Publications
 
-Author of:
+Authored by MD. Al Amin Sohag:
 
 - Circuit to Start Up
 - The Empress's Legacy
@@ -57,7 +57,7 @@ Author of:
 
 ## Current Mission
 
-Building strategic research frameworks that combine technology, economics, and infrastructure to support future global systems.
+Dedicated to building strategic research frameworks that combine technology, economics, and infrastructure to support future global systems.
 
 ---
 
