@@ -8,7 +8,7 @@ Welcome to the official GitHub research repository of AL AMIN SOHAG
 ---
 
 ## About
-
+ 
 Sohag is an independent strategic researcher focused on industrial resilience, digital infrastructure, and next-generation economic systems.
 
 His work explores mathematical frameworks, strategic logistics models, and digital economic structures designed to support large-scale business and technological ecosystems.
