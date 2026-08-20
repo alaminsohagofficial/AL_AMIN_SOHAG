@@ -327,109 +327,240 @@
             const tbody = document.getElementById('profilesTableBody');
             tbody.innerHTML = '';
             masterProfiles.forEach(p => {
-                const tr = document.createElement('tr');
-                tr.innerHTML = `
-                    <td class="p-2.5 text-center font-bold text-slate-400">${p.sl}</td>
-                    <td class="p-2.5 font-semibold text-white">${p.name}</td>
-                    <td class="p-2.5"><span class="ref-code">${p.id}</span></td>
-                    <td class="p-2.5 text-slate-400">${p.cat}</td>
-                    <td class="p-2.5 text-emerald-400 font-semibold">${p.notes}</td>
-                `;
-                tbody.appendChild(tr);
-            });
-        }
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MD AL AMIN SOHAG - Master Enterprise Production Portal</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap');
+        body { font-family: 'Hind Siliguri', sans-serif; background-color: #020617; color: #f8fafc; }
+        .sap-code { font-family: 'JetBrains Mono', monospace; }
+        .glass-card { background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.08); }
+        .tab-btn.active { background-color: #0284c7; color: #ffffff; border-color: #38bdf8; box-shadow: 0 4px 16px rgba(2, 132, 199, 0.4); }
+        .ref-code { font-family: 'JetBrains Mono', monospace; background: #0f172a; color: #38bdf8; padding: 2px 6px; border-radius: 4px; font-size: 0.8rem; border: 1px solid rgba(56, 189, 248, 0.25); }
+        .terminal-log { font-family: 'JetBrains Mono', monospace; background-color: #020617; border: 1px solid #1e293b; }
+        .otp-input { width: 42px; height: 48px; text-align: center; font-size: 1.25rem; font-weight: bold; font-family: monospace; background-color: #0f172a; border: 1px solid #334155; color: #38bdf8; border-radius: 8px; }
+        .otp-input:focus { outline: none; border-color: #3b82f6; box-shadow: 0 0 10px rgba(59, 130, 246, 0.4); }
+        .pulse-sap { animation: pulse-ring 1.8s cubic-bezier(0.215, 0.61, 0.355, 1) infinite; }
+        @keyframes pulse-ring { 0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(2, 132, 199, 0.7); } 70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(2, 132, 199, 0); } 100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(2, 132, 199, 0); } }
+        #toast { visibility: hidden; min-width: 280px; background-color: #0284c7; color: #fff; text-align: center; border-radius: 8px; padding: 12px 20px; position: fixed; z-index: 9999; bottom: 30px; right: 30px; font-size: 13.5px; font-weight: 600; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5); }
+        #toast.show { visibility: visible; animation: fadein 0.4s, fadeout 0.4s 2.4s; }
+        @keyframes fadein { from {bottom: 0; opacity: 0;} to {bottom: 30px; opacity: 1;} }
+        @keyframes fadeout { from {bottom: 30px; opacity: 1;} to {bottom: 0; opacity: 0;} }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
 
-        function executeSapPosting() {
-            const amt = Number(document.getElementById('sapAmount').value) || 0;
-            const ref = document.getElementById('sapRefNo').value;
-            const doc = (docCounter++).toString();
-            ledgerData.push({ date: "19-Aug-2026", type: "SAP", ref: ref, part: `SAP Document Posted (#${doc})`, credit: amt, debit: 0 });
-            renderLedger();
-            const log = document.getElementById('sapTerminalLog');
-            log.innerHTML += `<div class="text-emerald-400">[SUCCESS] Document ${doc} posted for Dealer 3000002272. Amount: ৳ ${amt.toLocaleString('en-IN')}</div>`;
-            log.scrollTop = log.scrollHeight;
-            showToast(`SAP Document ${doc} Posted!`);
-        }
+    <div id="toast"><i class="fa-solid fa-circle-check mr-2"></i> অপারেশন সফলভাবে সম্পন্ন হয়েছে!</div>
 
-        function generateRtgsOtp() {
-            showToast("SMS OTP পাঠানো হয়েছে: 849201");
-        }
+    <!-- Header -->
+    <header class="bg-slate-950 border-b border-slate-800 sticky top-0 z-50 py-3 px-4">
+        <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3">
+            <div class="flex items-center space-x-3 cursor-pointer" onclick="switchTab('dashboard')">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-sky-600 via-blue-700 to-indigo-800 flex items-center justify-center font-bold text-xl text-white shadow-lg shadow-sky-500/30">
+                    <i class="fa-solid fa-layer-group"></i>
+                </div>
+                <div>
+                    <div class="flex items-center gap-2">
+                        <h1 class="font-bold text-base md:text-lg text-white leading-tight">MD AL AMIN SOHAG</h1>
+                        <span class="bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full flex items-center gap-1.5 uppercase tracking-wider">
+                            <span class="w-2 h-2 rounded-full bg-emerald-400 pulse-sap"></span>
+                            <span>Loan Cleared (A/C Bal: BDT 0)</span>
+                        </span>
+                    </div>
+                    <p class="text-[11px] text-slate-400">SR Electronics Park (Dealer: 3000002272 / DEAL002905) & Salsabilah Amin Empires Engine</p>
+                </div>
+            </div>
 
-        function executeRtgsTransfer() {
-            const amt = Number(document.getElementById('rtgsAmt').value) || 0;
-            ledgerData.push({ date: "19-Aug-2026", type: "DZ", ref: "CITYRTGS-CONFIRMED", part: "City ➔ Sonali RTGS Fund Transfer", credit: amt, debit: 0 });
-            renderLedger();
-            showToast("সোনালী ব্যাংকে ফান্ড ট্রান্সফার সফল!");
-        }
+            <div class="flex items-center gap-3">
+                <div class="flex items-center bg-slate-900 px-3 py-1.5 rounded-lg border border-slate-800 text-xs gap-2">
+                    <span class="text-slate-400 font-semibold"><i class="fa-solid fa-dollar-sign text-emerald-400 mr-1"></i>১ USD =</span>
+                    <input type="number" id="usdRate" value="120" step="0.5" class="w-16 bg-slate-950 border border-slate-700 rounded px-2 py-1 text-center font-bold text-sky-400 focus:outline-none" oninput="updateCalculations()">
+                    <span class="text-slate-400 font-semibold">BDT</span>
+                </div>
+                <button onclick="window.print()" class="bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold px-3 py-2 rounded-lg border border-slate-700">
+                    <i class="fa-solid fa-print"></i> প্রিন্ট
+                </button>
+            </div>
+        </div>
 
-        function simulateOcrScan() {
-            document.getElementById('ocrResultBox').innerHTML = `<div class="text-emerald-400 font-mono font-bold">[EXTRACTED] Ref: CITYRTGS69545693BD | Amount: ৳ 30,00,000.00 | Status: Verified</div>`;
-            showToast("OCR স্ক্যান সফল!");
-        }
+        <!-- Navigation Tabs -->
+        <div class="max-w-7xl mx-auto px-4 border-t border-slate-800/80 flex overflow-x-auto gap-2 py-2 mt-2.5 scrollbar-none">
+            <button onclick="switchTab('dashboard')" id="tab-dashboard" class="tab-btn active text-xs font-medium px-4 py-2 rounded-lg text-slate-300 whitespace-nowrap"><i class="fa-solid fa-chart-pie mr-1"></i> ড্যাশবোর্ড</button>
+            <button onclick="switchTab('sap-posting')" id="tab-sap-posting" class="tab-btn text-xs font-medium px-4 py-2 rounded-lg text-slate-300 whitespace-nowrap"><i class="fa-solid fa-calculator mr-1"></i> SAP FI/CO Posting</button>
+            <button onclick="switchTab('interbank-rtgs')" id="tab-interbank-rtgs" class="tab-btn text-xs font-medium px-4 py-2 rounded-lg text-slate-300 whitespace-nowrap"><i class="fa-solid fa-arrow-right-arrow-left mr-1"></i> City ➔ Sonali RTGS</button>
+            <button onclick="switchTab('ocr-scanner')" id="tab-ocr-scanner" class="tab-btn text-xs font-medium px-4 py-2 rounded-lg text-slate-300 whitespace-nowrap"><i class="fa-solid fa-eye mr-1"></i> Vision OCR স্ক্যানার</button>
+            <button onclick="switchTab('ledger')" id="tab-ledger" class="tab-btn text-xs font-medium px-4 py-2 rounded-lg text-slate-300 whitespace-nowrap"><i class="fa-solid fa-receipt mr-1"></i> ডিলার লেজার</button>
+            <button onclick="switchTab('profiles')" id="tab-profiles" class="tab-btn text-xs font-medium px-4 py-2 rounded-lg text-slate-300 whitespace-nowrap"><i class="fa-solid fa-address-book mr-1"></i> ৮৮টি মাস্টার প্রোফাইল</button>
+            <button onclick="switchTab('ai-copilot')" id="tab-ai-copilot" class="tab-btn text-xs font-medium px-4 py-2 rounded-lg text-slate-300 whitespace-nowrap"><i class="fa-solid fa-brain mr-1"></i> Gemini AI Copilot</button>
+        </div>
+    </header>
 
-        function executeAI() {
-            const val = document.getElementById('aiInput').value.trim();
-            if (!val) return;
+    <!-- Main Content -->
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 py-6 space-y-6">
 
-            const box = document.getElementById('aiChatBox');
-            box.innerHTML += `<div><strong class="text-sky-400">You:</strong> ${val}</div>`;
+        <!-- TAB 1: DASHBOARD -->
+        <section id="page-dashboard" class="tab-content space-y-6">
+            <div class="glass-card rounded-2xl p-6 border-l-4 border-l-sky-500 bg-gradient-to-r from-slate-950 via-slate-900 to-sky-950/30 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                <div>
+                    <div class="flex items-center gap-2 mb-1">
+                        <span class="bg-sky-500/20 text-sky-300 border border-sky-500/30 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full uppercase sap-code">
+                            ENTERPRISE MASTER PORTAL
+                        </span>
+                        <span class="text-xs text-slate-400 font-mono">Status: Loan Closed Successfully (BDT 0 Bal)</span>
+                    </div>
+                    <h2 class="text-xl font-bold text-white">MD AL AMIN SOHAG - সমন্বিত এন্টারপ্রাইজ মাস্টার হাব</h2>
+                    <p class="text-xs text-slate-300 mt-1">৮৮টি মাস্টার প্রোফাইল, ডিলার লেজার (3000002272), লোন ক্লোজার সেটেলমেন্ট ও ব্যাংকিং পেমেন্ট নেটওয়ার্ক।</p>
+                </div>
+                <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 text-right shrink-0">
+                    <span class="text-xs text-slate-400 block font-semibold">সর্বমোট সমন্বিত নিট সম্পদ</span>
+                    <span class="text-2xl font-extrabold text-amber-400 sap-code" id="heroGrandTotal">৳ ২২,২০৪.৪৪ কোটি</span>
+                </div>
+            </div>
 
-            let reply = "কমান্ড গৃহীত হয়েছে। আপনার অনুরোধটি প্রসেস করা হচ্ছে।";
-            const query = val.toLowerCase();
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <div onclick="switchTab('ledger')" class="glass-card p-5 rounded-2xl cursor-pointer hover:border-sky-500/50 transition-all border-t-2 border-t-sky-500">
+                    <span class="text-xs font-bold text-sky-400 uppercase block mb-1">Closing Balance (Cr)</span>
+                    <span class="text-xl font-bold text-white block sap-code" id="dashLedgerBal">৳ ৩,৪৩,২৪,৭৩৮.০০</span>
+                    <span class="text-[10px] text-emerald-400 mt-1 block"><i class="fa-solid fa-circle-check"></i> লোন ফুল পেইড (BDT 0)</span>
+                </div>
+                <div class="glass-card p-5 rounded-2xl border-t-2 border-t-amber-500">
+                    <span class="text-xs font-bold text-amber-400 uppercase block mb-1">Gold Vault Reserve</span>
+                    <span class="text-xl font-bold text-white block sap-code">৳ ৫০.০০ কোটি</span>
+                    <span class="text-[10px] text-slate-400 mt-1 block">1,100 KG Gold Asset</span>
+                </div>
+                <div class="glass-card p-5 rounded-2xl border-t-2 border-t-blue-500">
+                    <span class="text-xs font-bold text-blue-400 uppercase block mb-1">Alphabet 1 Cr Shares</span>
+                    <span class="text-xl font-bold text-white block sap-code">৳ ২১,০০০.০০ কোটি</span>
+                    <span class="text-[10px] text-slate-400 mt-1 block">$1.75B USD Valuation</span>
+                </div>
+                <div onclick="switchTab('profiles')" class="glass-card p-5 rounded-2xl cursor-pointer hover:border-indigo-500/50 transition-all border-t-2 border-t-indigo-500">
+                    <span class="text-xs font-bold text-indigo-400 uppercase block mb-1">Master Directory Vault</span>
+                    <span class="text-xl font-bold text-white block sap-code">88 Profiles</span>
+                    <span class="text-[10px] text-slate-400 mt-1 block">NPSB Loan Settled A/C</span>
+                </div>
+            </div>
+        </section>
 
-            if (query.includes("ব্যালেন্স") || query.includes("balance") || query.includes("লেজার") || query.includes("ledger")) {
-                const bal = document.getElementById('ledgerClosingVal').innerText;
-                reply = `বর্তমান ডিলার লেজার ${bal}। সমস্ত লেনদেন এবং SAP ভাউচার রিকনসাইল্ড।`;
-            } else if (query.includes("সম্পদ") || query.includes("total") || query.includes("asset") || query.includes("টাকা")) {
-                const grandTotal = document.getElementById('heroGrandTotal').innerText;
-                reply = `সর্বমোট সমন্বিত পোর্টফোলিও মূল্যায়ন: ${grandTotal} (Alphabet ১ কোটি শেয়ার, গোল্ড রিজার্ভ ও ক্যাশ রিজার্ভ সহ)।`;
-            } else if (query.includes("ডিলার") || query.includes("dealer")) {
-                reply = "ডিলার কোডসমূহ: SR Electronics Park (3000002272 / DEAL002905)।";
-            }
+        <!-- TAB 2: SAP FI/CO POSTING -->
+        <section id="page-sap-posting" class="tab-content space-y-6 hidden">
+            <div class="glass-card rounded-2xl p-6 space-y-6">
+                <div class="flex justify-between items-center border-b border-slate-800 pb-3">
+                    <h2 class="text-base font-bold text-white"><i class="fa-solid fa-calculator text-sky-400 mr-2"></i>SAP FI General Ledger Posting (F-02 / FB50)</h2>
+                    <span class="text-xs font-bold text-sky-400 bg-sky-900/30 border border-sky-500/30 px-3 py-1 rounded sap-code">Company Code: 1000</span>
+                </div>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <div class="space-y-3 text-xs">
+                        <div class="grid grid-cols-2 gap-3">
+                            <div><label class="block text-slate-400 mb-1">Doc Date</label><input type="text" id="sapDocDate" value="20-Aug-2026" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-white font-mono"></div>
+                            <div><label class="block text-slate-400 mb-1">Dealer Code</label><input type="text" value="3000002272" readonly class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-amber-400 font-mono font-bold"></div>
+                        </div>
+                        <div>
+                            <label class="block text-slate-400 mb-1">Reference / UTR</label>
+                            <input type="text" id="sapRefNo" value="NPSB-LOAN-CLOSE-3107" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-white font-mono">
+                        </div>
+                        <div>
+                            <label class="block text-slate-400 mb-1">Amount (BDT)</label>
+                            <input type="number" id="sapAmount" value="1707984" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-emerald-400 font-mono font-bold text-sm">
+                        </div>
+                        <button onclick="executeSapPosting()" class="w-full bg-sky-600 hover:bg-sky-500 text-white font-bold py-3 rounded-xl transition-all"><i class="fa-solid fa-file-signature mr-1"></i> এসএপি সিস্টেমে পোস্ট করুন</button>
+                    </div>
+                    <div class="sap-terminal rounded-xl p-4 text-xs text-sky-400 space-y-1 h-52 overflow-y-auto" id="sapTerminalLog">
+                        <div>[SAP_INIT] S/4HANA Connection Active. Loan Account Settled via NPSB.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-            box.innerHTML += `<div><strong class="text-amber-400">Gemini AI:</strong> ${reply}</div>`;
-            box.scrollTop = box.scrollHeight;
-            document.getElementById('aiInput').value = '';
-        }
+        <!-- TAB 3: CITY TO SONALI RTGS -->
+        <section id="page-interbank-rtgs" class="tab-content space-y-6 hidden">
+            <div class="glass-card rounded-2xl p-6 space-y-6">
+                <div class="flex justify-between items-center border-b border-slate-800 pb-3">
+                    <h2 class="text-base font-bold text-white"><i class="fa-solid fa-arrow-right-arrow-left text-emerald-400 mr-2"></i>Bank Transfer & NPSB Loan Settlement</h2>
+                    <span class="text-xs font-mono text-blue-400">ISO 20022 Clearing</span>
+                </div>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 text-xs">
+                    <div class="space-y-3">
+                        <div><label class="text-slate-400">Settled Amount (BDT)</label><input type="number" id="rtgsAmt" value="1707984" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-emerald-400 font-mono font-bold"></div>
+                        <button onclick="generateRtgsOtp()" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2.5 rounded-xl"><i class="fa-solid fa-mobile-retro mr-1"></i> SMS OTP পাঠান</button>
+                    </div>
+                    <div class="bg-slate-900/90 border border-slate-800 p-4 rounded-xl space-y-3">
+                        <div class="flex justify-between items-center"><span class="text-slate-300 font-bold">2-Step Security OTP</span><span class="text-amber-400 font-mono font-bold" id="rtgsOtpDisplay">Code: 849201</span></div>
+                        <div class="flex justify-center gap-2 my-2">
+                            <input type="text" maxlength="1" class="otp-input" value="8"><input type="text" maxlength="1" class="otp-input" value="4"><input type="text" maxlength="1" class="otp-input" value="9"><input type="text" maxlength="1" class="otp-input" value="2"><input type="text" maxlength="1" class="otp-input" value="0"><input type="text" maxlength="1" class="otp-input" value="1">
+                        </div>
+                        <button onclick="executeRtgsTransfer()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2.5 rounded-xl"><i class="fa-solid fa-circle-check mr-1"></i> লোন সেটেলমেন্ট কনফার্ম করুন</button>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-        function updateCalculations() {
-            const rate = parseFloat(document.getElementById('usdRate').value) || 120;
-            const total = directCash + goldVault + ((alphabetShares * 175) * rate) + (usdeAmount * rate);
-            document.getElementById('heroGrandTotal').innerText = `৳ ${(total / 10000000).toLocaleString('en-IN', { maximumFractionDigits: 2 })} কোটি`;
-        }
+        <!-- TAB 4: VISION OCR SCANNER -->
+        <section id="page-ocr-scanner" class="tab-content space-y-6 hidden">
+            <div class="glass-card rounded-2xl p-6 space-y-4">
+                <h2 class="text-base font-bold text-white border-b border-slate-800 pb-3"><i class="fa-solid fa-eye text-purple-400 mr-2"></i>Gemini Multimodal Invoice & OCR Scanner</h2>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 text-xs">
+                    <div class="border-2 border-dashed border-slate-700 p-6 rounded-xl text-center space-y-2">
+                        <i class="fa-solid fa-receipt text-3xl text-purple-400"></i>
+                        <p class="text-slate-300 font-bold">NPSB লোন পেমেন্ট স্লিপ বা এসএমএস স্ক্যান করুন</p>
+                        <button onclick="simulateOcrScan()" class="bg-purple-600 hover:bg-purple-500 text-white px-4 py-2 rounded-lg font-bold">স্যাম্পল স্ক্যান চালান</button>
+                    </div>
+                    <div class="bg-slate-900 border border-slate-800 p-4 rounded-xl space-y-2" id="ocrResultBox">
+                        <span class="text-slate-400 font-bold block">OCR Extracted Data:</span>
+                        <div class="text-slate-300 font-mono">NPSB Credited: ৳ 1,707,984.00 | A/C Bal: BDT 0 | Status: Verified</div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-        function filterProfiles() {
-            const val = document.getElementById('profileSearch').value.toUpperCase();
-            const tr = document.getElementById('profilesTableBody').getElementsByTagName('tr');
-            for (let i = 0; i < tr.length; i++) {
-                tr[i].style.display = (tr[i].innerText || tr[i].textContent).toUpperCase().indexOf(val) > -1 ? "" : "none";
-            }
-        }
+        <!-- TAB 5: DEALER LEDGER -->
+        <section id="page-ledger" class="tab-content space-y-6 hidden">
+            <div class="glass-card rounded-2xl p-6 space-y-4">
+                <div class="flex justify-between items-center border-b border-slate-800 pb-3">
+                    <h2 class="text-base font-bold text-white"><i class="fa-solid fa-receipt text-emerald-400 mr-2"></i>SR Electronics Park - Dealer Ledger (3000002272)</h2>
+                    <span class="text-xs font-bold text-emerald-400 bg-emerald-900/30 border border-emerald-500/30 px-3 py-1 rounded sap-code" id="ledgerClosingVal">Closing Bal: ৳ ৩,৪৩,২৪,৭৩৮.০০ Cr</span>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-xs border-collapse">
+                        <thead>
+                            <tr class="bg-slate-900 text-slate-300 border-b border-slate-700">
+                                <th class="p-2.5">Date</th><th class="p-2.5 text-center">Type</th><th class="p-2.5">Doc Ref</th><th class="p-2.5">Particulars</th><th class="p-2.5 text-right">Credit (৳)</th><th class="p-2.5 text-right">Debit (৳)</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-800 text-slate-200" id="ledgerTableBody"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
 
-        function showToast(msg) {
-            const toast = document.getElementById('toast');
-            if (msg) toast.innerHTML = `<i class="fa-solid fa-circle-check mr-2"></i> ${msg}`;
-            toast.className = 'show';
-            setTimeout(() => { toast.className = toast.className.replace('show', ''); }, 2800);
-        }
+        <!-- TAB 6: 88 MASTER PROFILES -->
+        <section id="page-profiles" class="tab-content space-y-6 hidden">
+            <div class="glass-card rounded-2xl p-6 space-y-4">
+                <div class="flex justify-between items-center border-b border-slate-800 pb-3">
+                    <h2 class="text-base font-bold text-white"><i class="fa-solid fa-address-book text-indigo-400 mr-2"></i>৮৮টি সম্পূর্ণ মাস্টার প্রোফাইল ডিরেক্টরি</h2>
+                    <input type="text" id="profileSearch" placeholder="খুঁজুন..." class="bg-slate-900 border border-slate-700 rounded-lg px-3 py-1.5 text-xs text-white" onkeyup="filterProfiles()">
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-xs border-collapse">
+                        <thead>
+                            <tr class="bg-slate-900 text-slate-300 border-b border-slate-700">
+                                <th class="p-2.5 text-center">SL</th><th class="p-2.5">Profile Name</th><th class="p-2.5">Identifier / Number</th><th class="p-2.5">Category</th><th class="p-2.5">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-800 text-slate-200" id="profilesTableBody"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
 
-        window.onload = function() {
-            renderProfiles();
-            renderLedger();
-            updateCalculations();
-
-            // OTP Auto-Focus Handler
-            const otpInputs = document.querySelectorAll('.otp-input');
-            otpInputs.forEach((input, index) => {
-                input.addEventListener('keyup', (e) => {
-                    if (e.key >= '0' && e.key <= '9' && index < otpInputs.length - 1) {
-                        otpInputs[index + 1].focus();
-                    } else if (e.key === 'Backspace' && index > 0) {
-                        otpInputs[index - 1].focus();
-                    }
-                });
-            });
-        };
-    </script>
-</body>
-</html>
+        <!-- TAB 7: GEMINI AI COPILOT -->
+        <section id="page-ai-copilot" class="tab-content space-y-6 hidden">
+            <div class="glass-ca
