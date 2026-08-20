@@ -1,58 +1,326 @@
-class MasterEnterpriseDashboard:
-    def __init__(self):
-        self.owner = "MD. AL AMIN SOHAG"
-        self.title = "Managing Director"
-        self.company = "Salsabilah Amin Empires Ltd."
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>এন্টারপ্রাইজ মাস্টার ড্যাশবোর্ড - আল আমিন সোহাগ | সেন্ট্রাল ট্রেজারি ও লাইভ লেজার</title>
+    
+    <!-- Bootstrap 5 CSS & FontAwesome Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap');
         
-        self.master_metrics = {
-            "Total Portfolio Value": "৳ ২২,২০৪.৮৮ কোটি",
-            "Closing Balance (CR)": "৳ ১,৯২,১৬,১৪৮.০০ (SR Electronics Park)",
-            "Gold Vault Reserve": "৳ ৫০.০০ কোটি (10,000g 24K Gold)",
-            "Alphabet Shares": "৳ ২৫,০০,০০ কোটি",
-            "Master Directory Vault": "88 Profiles Synchronized"
+        body { 
+            background-color: #f1f5f9; 
+            font-family: 'Inter', 'Noto Sans Bengali', sans-serif;
+            color: #334155;
+            overflow-x: hidden;
         }
         
-        self.ecosystem_assets = {
-            "New York Luxury Real Estate": {
-                "Location": "Manhattan, New York, USA",
-                "Status": "Verified & Integrated",
-                "Valuation": "$10,000,000 USD"
-            },
-            "Digital Media & YouTube Hub": {
-                "Platform": "YouTube Global Creator Stream",
-                "Focus": "International Relations, Geopolitics & Finance",
-                "Status": "Active Integration"
-            },
-            "Global Intellectual Property": {
-                "Trademarks": ["IR 2652515", "IR 2639290", "EUTM 018923558"],
-                "Status": "Registered"
-            },
-            "Asset Recovery & Claims": {
-                "Delaware Claims": ["839927", "839928", "839929"],
-                "Disbursement Bank": "Islami Bank Bangladesh PLC (Chuadanga)"
-            }
+        .sidebar { 
+            min-height: 100vh; 
+            background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%); 
+            color: #fff;
+            box-shadow: 4px 0 15px rgba(0,0,0,0.05);
+        }
+        .sidebar .nav-link { 
+            color: #94a3b8; 
+            border-radius: 10px; 
+            margin-bottom: 6px; 
+            font-weight: 500; 
+            padding: 12px 16px;
+            cursor: pointer; 
+            transition: all 0.2s ease-in-out; 
+            display: flex;
+            align-items: center;
+        }
+        .sidebar .nav-link i { width: 24px; font-size: 1.1rem; }
+        .sidebar .nav-link.active, .sidebar .nav-link:hover { 
+            background-color: #0284c7; 
+            color: #ffffff; 
+            box-shadow: 0 4px 12px rgba(2, 132, 199, 0.3);
+        }
+        
+        .balance-card { 
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); 
+            color: white; 
+            border-radius: 20px; 
+            box-shadow: 0 15px 30px rgba(15, 23, 42, 0.25);
+        }
+        
+        .card-custom { 
+            border: none; 
+            border-radius: 16px; 
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); 
+            background: #ffffff;
+        }
+        
+        .sms-box { 
+            background-color: #f8fafc; 
+            color: #1e293b; 
+            border-left: 4px solid #38bdf8; 
+            border-radius: 10px; 
+            padding: 14px; 
+            font-size: 0.88rem; 
+            margin-bottom: 12px; 
+            border: 1px solid #e2e8f0;
         }
 
-    def render_dashboard(self):
-        print("==================================================")
-        print(f" ENTERPRISE MASTER PORTAL: {self.owner}")
-        print(f" Status: Production Live | {self.company}")
-        print("==================================================\n")
-        
-        print("--- [ FINANCIAL & ASSET METRICS ] ---")
-        for metric, value in self.master_metrics.items():
-            print(f" • {metric}: {value}")
+        .check-item {
+            display: flex;
+            align-items: start;
+            gap: 10px;
+            padding: 10px;
+            background: #f8fafc;
+            border-radius: 10px;
+            margin-bottom: 8px;
+            border: 1px solid #e2e8f0;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container-fluid">
+    <div class="row">
+        <!-- সাইডবার নেভিগেশন -->
+        <div class="col-md-3 col-lg-2 sidebar p-3 d-flex flex-column justify-content-between">
+            <div>
+                <div class="d-flex align-items-center gap-2 mb-4 px-1 mt-2">
+                    <div class="bg-white rounded-circle p-2 d-inline-flex align-items-center justify-content-center">
+                        <i class="fa-solid fa-building-shield fs-4 text-dark"></i>
+                    </div>
+                    <div>
+                        <h5 class="fw-bold mb-0 text-white" style="font-size: 1.05rem;">সুবাহ এন্টারপ্রাইজ</h5>
+                        <small class="text-info font-monospace d-block" style="font-size: 0.68rem;">LIVE CBS PORTAL</small>
+                    </div>
+                </div>
+
+                <ul class="nav flex-column" id="navMenu">
+                    <li class="nav-item">
+                        <a class="nav-link active" onclick="showSection('dashboard', this)">
+                            <i class="fa-solid fa-chart-pie me-2"></i>মাস্টার ড্যাশবোর্ড
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" onclick="showSection('transfer', this)">
+                            <i class="fa-solid fa-money-bill-transfer me-2"></i>লেনদেন এন্ট্রি
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" onclick="showSection('statement', this)">
+                            <i class="fa-solid fa-file-invoice-dollar me-2"></i>সমন্বিত লেজার
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="p-3 bg-dark bg-opacity-50 rounded-4 text-center border border-secondary border-opacity-25 mb-2">
+                <div class="d-flex align-items-center justify-content-center gap-2 mb-1">
+                    <span class="spinner-grow spinner-grow-sm text-success" role="status"></span>
+                    <small class="text-light fw-bold">লোকাল স্টোরেজ লাইভ</small>
+                </div>
+                <div class="small text-muted font-monospace" style="font-size: 0.72rem;">
+                    Sync Mode: Auto-Persist<br>
+                    State: 100% Retained
+                </div>
+            </div>
+        </div>
+
+        <!-- মূল কন্টেন্ট এলাকা -->
+        <div class="col-md-9 col-lg-10 p-4" style="height: 100vh; overflow-y: auto;">
             
-        print("\n--- [ GLOBAL ECOSYSTEM & ASSETS ] ---")
-        for category, details in self.ecosystem_assets.items():
-            print(f"\n [+] {category}:")
-            for key, val in details.items():
-                print(f"     - {key}: {val}")
-                
-        print("\n==================================================")
-        print(" Status: 100% Reconciled. Single Instance Active.")
-        print("==================================================")
+            <!-- সেকশন ১: ড্যাশবোর্ড -->
+            <div id="sec-dashboard" class="app-sec">
+                <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4 gap-2">
+                    <div>
+                        <h4 class="fw-bold text-dark mb-1">সমন্বিত মাস্টার ট্রেজারি ড্যাশবোর্ড</h4>
+                        <span class="text-secondary small">
+                            <i class="fa-solid fa-user-tie me-1"></i> ব্যবস্থাপনা পরিচালক: <strong>মো. আল আমিন সোহাগ</strong>
+                        </span>
+                    </div>
+                    <div>
+                        <button onclick="resetLedgerToDefault()" class="btn btn-sm btn-outline-danger rounded-pill">
+                            <i class="fa-solid fa-rotate-left me-1"></i> রিসেট ডিফল্ট
+                        </button>
+                    </div>
+                </div>
 
-if __name__ == "__main__":
-    dashboard = MasterEnterpriseDashboard()
-    dashboard.render_dashboard()
+                <!-- মাস্টার ব্যালেন্স কার্ড -->
+                <div class="card balance-card p-4 p-md-5 mb-4 border-0">
+                    <div class="row align-items-center">
+                        <div class="col-lg-7">
+                            <span class="badge bg-white bg-opacity-20 text-white rounded-pill px-3 py-1 mb-2">মোট সমন্বিত স্থিতি (Total Equity)</span>
+                            <h1 class="display-4 fw-bold my-2 text-white" id="liveBalanceDisplay">৳ 1,50,01,213.00</h1>
+                            <p class="mb-0 text-white opacity-95">ডিপোজিট অ্যাকাউন্ট (DBBL): <strong class="text-warning">7017511802593</strong></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-4 mb-4">
+                    <div class="col-md-6">
+                        <div class="card card-custom p-4 h-100 border-start border-4 border-primary">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <h5 class="fw-bold text-dark"><i class="fa-solid fa-building-columns text-primary me-2"></i>ডাচ-বাংলা ব্যাংক (DBBL)</h5>
+                                <span class="badge bg-success rounded-pill">সেটেল্ড</span>
+                            </div>
+                            <p class="text-muted small mb-1">গুগল ইন্টারন্যাশনাল রেমিট্যান্স (FT26187GOOG9999)</p>
+                            <h4 class="fw-bold text-primary mb-0">৳ 2,00,00,000.00</h4>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card card-custom p-4 h-100 border-start border-4 border-success">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <h5 class="fw-bold text-dark"><i class="fa-solid fa-building-columns text-success me-2"></i>সোনালী ব্যাংক পিএলসি</h5>
+                                <span class="badge bg-primary rounded-pill">ক্লিয়ার্ড</span>
+                            </div>
+                            <p class="text-muted small mb-1">বাটারফ্লাই মার্কেটিং লিমিটেড সেটেলমেন্ট (RTGS)</p>
+                            <h4 class="fw-bold text-success mb-0">৳ 1,04,00,000.00</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- সেকশন ২: লেনদেন এন্ট্রি -->
+            <div id="sec-transfer" class="app-sec" style="display:none;">
+                <h4 class="fw-bold text-dark mb-3"><i class="fa-solid fa-money-bill-transfer text-primary me-2"></i>নতুন লেনদেন এন্ট্রি ও ইনস্ট্যান্ট সিঙ্ক</h4>
+                <div class="card card-custom p-4 bg-white">
+                    <form id="trxForm" onsubmit="handleNewTrx(event)">
+                        <div class="row g-3 mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold">লেনদেনের বিবরণ</label>
+                                <input type="text" id="trxDesc" class="form-control" placeholder="যেমন: নতুন ডিপোজিট বা লোন সমন্বয়" required>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label fw-semibold">লেনদেনের ধরন</label>
+                                <select id="trxType" class="form-select" required>
+                                    <option value="CR">ক্রেডিট (+) বৃদ্ধি</option>
+                                    <option value="DR">ডেবিট (-) কর্তন</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label fw-semibold">টাকার পরিমাণ (BDT)</label>
+                                <input type="number" id="trxAmount" class="form-control font-monospace fw-bold" placeholder="0.00" min="1" required>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary px-4 py-2 fw-bold rounded-3">
+                            <i class="fa-solid fa-plus-circle me-1"></i> লেজারে যুক্ত ও সেভ করুন
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- সেকশন ৩: সমন্বিত লেজার -->
+            <div id="sec-statement" class="app-sec" style="display:none;">
+                <h4 class="fw-bold text-dark mb-3">সমন্বিত মাস্টার লেজার (Persisted State)</h4>
+                <div class="card card-custom p-3 bg-white">
+                    <table class="table table-hover align-middle mb-0">
+                        <thead class="table-light">
+                            <tr>
+                                <th>তারিখ</th>
+                                <th>বিবরণ</th>
+                                <th class="text-end">ডেবিট (-)</th>
+                                <th class="text-end">ক্রেডিট (+)</th>
+                                <th class="text-end">অবশিষ্ট স্থিতি</th>
+                            </tr>
+                        </thead>
+                        <tbody id="ledgerTableBody">
+                            <!-- ডায়নামিক লোড হবে -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    const DEFAULT_BALANCE = 15001213.00;
+    const DEFAULT_ENTRIES = [
+        { date: '20-Aug-2026', desc: 'Google Ireland Limited - Remittance [FT26187GOOG9999]', dr: 0, cr: 20000000.00, bal: 15001213.00 },
+        { date: '19-Aug-2026', desc: 'Butterfly Marketing Limited Settlement via Sonali RTGS', dr: 10400000.00, cr: 0, bal: -4998787.00 },
+        { date: '13-Aug-2026', desc: 'Minister Hi-Tech Park Dealer DEAL002905 Reserve', dr: 0, cr: 33056297.00, bal: 5401213.00 }
+    ];
+
+    let currentBalance = parseFloat(localStorage.getItem('master_balance')) || DEFAULT_BALANCE;
+    let ledgerHistory = JSON.parse(localStorage.getItem('master_ledger')) || DEFAULT_ENTRIES;
+
+    function formatBDT(amount) {
+        return '৳ ' + Number(amount).toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    }
+
+    function renderUI() {
+        document.getElementById('liveBalanceDisplay').innerText = formatBDT(currentBalance);
+        const tbody = document.getElementById('ledgerTableBody');
+        tbody.innerHTML = '';
+
+        ledgerHistory.forEach(item => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td>${item.date}</td>
+                <td>${item.desc}</td>
+                <td class="text-end ${item.dr > 0 ? 'text-danger fw-bold' : 'text-muted'}">${item.dr > 0 ? formatBDT(item.dr) : '-'}</td>
+                <td class="text-end ${item.cr > 0 ? 'text-success fw-bold' : 'text-muted'}">${item.cr > 0 ? formatBDT(item.cr) : '-'}</td>
+                <td class="text-end fw-bold">${formatBDT(item.bal)} Cr</td>
+            `;
+            tbody.appendChild(tr);
+        });
+    }
+
+    function handleNewTrx(e) {
+        e.preventDefault();
+        const desc = document.getElementById('trxDesc').value;
+        const type = document.getElementById('trxType').value;
+        const amount = parseFloat(document.getElementById('trxAmount').value);
+
+        if (isNaN(amount) || amount <= 0) return;
+
+        let dr = 0, cr = 0;
+        if (type === 'CR') {
+            cr = amount;
+            currentBalance += amount;
+        } else {
+            dr = amount;
+            currentBalance -= amount;
+        }
+
+        const now = new Date();
+        const dateStr = `${now.getDate()}-Aug-${now.getFullYear()}`;
+
+        ledgerHistory.unshift({ date: dateStr, desc: desc, dr: dr, cr: cr, bal: currentBalance });
+
+        // Save to LocalStorage
+        localStorage.setItem('master_balance', currentBalance);
+        localStorage.setItem('master_ledger', JSON.stringify(ledgerHistory));
+
+        renderUI();
+        document.getElementById('trxForm').reset();
+        showSection('statement');
+    }
+
+    function resetLedgerToDefault() {
+        if (confirm('আপনি কি পূর্বনির্ধারিত ডিফল্ট ডেটায় ফিরে যেতে চান?')) {
+            localStorage.removeItem('master_balance');
+            localStorage.removeItem('master_ledger');
+            currentBalance = DEFAULT_BALANCE;
+            ledgerHistory = DEFAULT_ENTRIES;
+            renderUI();
+        }
+    }
+
+    function showSection(sectionId, element) {
+        document.querySelectorAll('.app-sec').forEach(sec => sec.style.display = 'none');
+        document.getElementById('sec-' + sectionId).style.display = 'block';
+        if(element) {
+            document.querySelectorAll('.sidebar .nav-link').forEach(link => link.classList.remove('active'));
+            element.classList.add('active');
+        }
+    }
+
+    window.onload = renderUI;
+</script>
+
+</body>
+</html>
