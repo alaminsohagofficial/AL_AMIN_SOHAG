@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>এন্টারপ্রাইজ মাস্টার ড্যাশবোর্ড - আল আমিন সোহাগ | সেন্ট্রাল ট্রেজারি ও লাইভ লেজার</title>
+    <title>এন্টারপ্রাইজ মাস্টার ড্যাশবোর্ড - আল আমিন সোহাগ | Gemini AI ও সেন্ট্রাল সিবিএস</title>
     
     <!-- Bootstrap 5 CSS & FontAwesome Icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -56,27 +56,34 @@
             box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); 
             background: #ffffff;
         }
-        
-        .sms-box { 
-            background-color: #f8fafc; 
-            color: #1e293b; 
-            border-left: 4px solid #38bdf8; 
-            border-radius: 10px; 
-            padding: 14px; 
-            font-size: 0.88rem; 
-            margin-bottom: 12px; 
-            border: 1px solid #e2e8f0;
+
+        .ai-chat-box {
+            background-color: #0f172a;
+            border-radius: 16px;
+            padding: 16px;
+            border: 1px solid #334155;
+            color: #f8fafc;
+            min-height: 250px;
+            max-height: 400px;
+            overflow-y: auto;
         }
 
-        .check-item {
-            display: flex;
-            align-items: start;
-            gap: 10px;
-            padding: 10px;
-            background: #f8fafc;
-            border-radius: 10px;
-            margin-bottom: 8px;
-            border: 1px solid #e2e8f0;
+        .ai-msg {
+            background-color: #1e293b;
+            border-left: 4px solid #38bdf8;
+            padding: 10px 14px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+
+        .user-msg {
+            background-color: #0284c7;
+            padding: 10px 14px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+            text-align: right;
         }
     </style>
 </head>
@@ -93,7 +100,7 @@
                     </div>
                     <div>
                         <h5 class="fw-bold mb-0 text-white" style="font-size: 1.05rem;">সুবাহ এন্টারপ্রাইজ</h5>
-                        <small class="text-info font-monospace d-block" style="font-size: 0.68rem;">LIVE CBS PORTAL</small>
+                        <small class="text-info font-monospace d-block" style="font-size: 0.68rem;">GEMINI AI MASTER CBS</small>
                     </div>
                 </div>
 
@@ -101,6 +108,11 @@
                     <li class="nav-item">
                         <a class="nav-link active" onclick="showSection('dashboard', this)">
                             <i class="fa-solid fa-chart-pie me-2"></i>মাস্টার ড্যাশবোর্ড
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" onclick="showSection('ai-console', this)">
+                            <i class="fa-solid fa-robot me-2"></i>জেমিনি এআই কনসোল
                         </a>
                     </li>
                     <li class="nav-item">
@@ -119,11 +131,11 @@
             <div class="p-3 bg-dark bg-opacity-50 rounded-4 text-center border border-secondary border-opacity-25 mb-2">
                 <div class="d-flex align-items-center justify-content-center gap-2 mb-1">
                     <span class="spinner-grow spinner-grow-sm text-success" role="status"></span>
-                    <small class="text-light fw-bold">লোকাল স্টোরেজ লাইভ</small>
+                    <small class="text-light fw-bold">Gemini AI সিঙ্ক লাইভ</small>
                 </div>
                 <div class="small text-muted font-monospace" style="font-size: 0.72rem;">
-                    Sync Mode: Auto-Persist<br>
-                    State: 100% Retained
+                    Sync Mode: Real-time API<br>
+                    State: 100% Persisted
                 </div>
             </div>
         </div>
@@ -147,7 +159,6 @@
                     </div>
                 </div>
 
-                <!-- মাস্টার ব্যালেন্স কার্ড -->
                 <div class="card balance-card p-4 p-md-5 mb-4 border-0">
                     <div class="row align-items-center">
                         <div class="col-lg-7">
@@ -165,7 +176,7 @@
                                 <h5 class="fw-bold text-dark"><i class="fa-solid fa-building-columns text-primary me-2"></i>ডাচ-বাংলা ব্যাংক (DBBL)</h5>
                                 <span class="badge bg-success rounded-pill">সেটেল্ড</span>
                             </div>
-                            <p class="text-muted small mb-1">গুগল ইন্টারন্যাশনাল রেমিট্যান্স (FT26187GOOG9999)</p>
+                            <p class="text-muted small mb-1">গুগল রেমিট্যান্স (FT26187GOOG9999)</p>
                             <h4 class="fw-bold text-primary mb-0">৳ 2,00,00,000.00</h4>
                         </div>
                     </div>
@@ -175,14 +186,42 @@
                                 <h5 class="fw-bold text-dark"><i class="fa-solid fa-building-columns text-success me-2"></i>সোনালী ব্যাংক পিএলসি</h5>
                                 <span class="badge bg-primary rounded-pill">ক্লিয়ার্ড</span>
                             </div>
-                            <p class="text-muted small mb-1">বাটারফ্লাই মার্কেটিং লিমিটেড সেটেলমেন্ট (RTGS)</p>
+                            <p class="text-muted small mb-1">বাটারফ্লাই মার্কেটিং সেটেলমেন্ট (RTGS)</p>
                             <h4 class="fw-bold text-success mb-0">৳ 1,04,00,000.00</h4>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- সেকশন ২: লেনদেন এন্ট্রি -->
+            <!-- সেকশন ২: জেমিনি এআই কনসোল -->
+            <div id="sec-ai-console" class="app-sec" style="display:none;">
+                <h4 class="fw-bold text-dark mb-3"><i class="fa-solid fa-robot text-primary me-2"></i>জেমিনি এআই রিয়েল-টাইম ট্র্যাকিং কনসোল</h4>
+                <div class="card card-custom p-4 bg-white mb-3">
+                    <div class="row g-2 mb-3">
+                        <div class="col-md-9">
+                            <input type="password" id="geminiApiKey" class="form-control font-monospace" placeholder="আপনার Gemini API Key এখানে দিন (ব্রাউজারে সেভ থাকবে)">
+                        </div>
+                        <div class="col-md-3">
+                            <button onclick="saveApiKey()" class="btn btn-dark w-100 fw-bold">API Key সংরক্ষণ</button>
+                        </div>
+                    </div>
+                    
+                    <div class="ai-chat-box mb-3" id="aiChatContainer">
+                        <div class="ai-msg">
+                            <strong>Gemini Assistant:</strong> স্বাগতম সোহাগ ভাই। আমি আপনার ড্যাশবোর্ড ও মাস্টার লেজারের সাথে সংযুক্ত। যেকোনো আর্থিক বিশ্লেষণ বা অডিটের জন্য প্রশ্ন করুন।
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <input type="text" id="aiUserPrompt" class="form-control" placeholder="জেমিনিকে নির্দেশ দিন (যেমন: বর্তমান ব্যালেন্স বিশ্লেষণ করো)..." onkeypress="if(event.key === 'Enter') sendToGemini()">
+                        <button class="btn btn-primary px-4 fw-bold" onclick="sendToGemini()">
+                            <i class="fa-solid fa-paper-plane me-1"></i> পাঠান
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- সেকশন ৩: লেনদেন এন্ট্রি -->
             <div id="sec-transfer" class="app-sec" style="display:none;">
                 <h4 class="fw-bold text-dark mb-3"><i class="fa-solid fa-money-bill-transfer text-primary me-2"></i>নতুন লেনদেন এন্ট্রি ও ইনস্ট্যান্ট সিঙ্ক</h4>
                 <div class="card card-custom p-4 bg-white">
@@ -211,7 +250,7 @@
                 </div>
             </div>
 
-            <!-- সেকশন ৩: সমন্বিত লেজার -->
+            <!-- সেকশন ৪: সমন্বিত লেজার -->
             <div id="sec-statement" class="app-sec" style="display:none;">
                 <h4 class="fw-bold text-dark mb-3">সমন্বিত মাস্টার লেজার (Persisted State)</h4>
                 <div class="card card-custom p-3 bg-white">
@@ -225,9 +264,7 @@
                                 <th class="text-end">অবশিষ্ট স্থিতি</th>
                             </tr>
                         </thead>
-                        <tbody id="ledgerTableBody">
-                            <!-- ডায়নামিক লোড হবে -->
-                        </tbody>
+                        <tbody id="ledgerTableBody"></tbody>
                     </table>
                 </div>
             </div>
@@ -267,6 +304,57 @@
             `;
             tbody.appendChild(tr);
         });
+
+        const savedKey = localStorage.getItem('gemini_api_key');
+        if (savedKey) document.getElementById('geminiApiKey').value = savedKey;
+    }
+
+    function saveApiKey() {
+        const key = document.getElementById('geminiApiKey').value.trim();
+        if(key) {
+            localStorage.setItem('gemini_api_key', key);
+            alert('Gemini API Key সফলভাবে সংরক্ষিত হয়েছে!');
+        }
+    }
+
+    async function sendToGemini() {
+        const promptInput = document.getElementById('aiUserPrompt');
+        const userText = promptInput.value.trim();
+        const apiKey = localStorage.getItem('gemini_api_key') || document.getElementById('geminiApiKey').value.trim();
+
+        if (!userText) return;
+        if (!apiKey) {
+            alert('দয়া করে প্রথমে Gemini API Key প্রদান করুন!');
+            return;
+        }
+
+        const chatBox = document.getElementById('aiChatContainer');
+        chatBox.innerHTML += `<div class="user-msg">${userText}</div>`;
+        promptInput.value = '';
+
+        const contextPrompt = `
+Context: Master Ledger Balance is ${currentBalance} BDT.
+Recent Transactions: ${JSON.stringify(ledgerHistory.slice(0, 3))}
+User Request: ${userText}
+Respond concisely in Bengali as Master ERP & Treasury Assistant.`;
+
+        try {
+            const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    contents: [{ parts: [{ text: contextPrompt }] }]
+                })
+            });
+
+            const data = await response.json();
+            const reply = data.candidates?.[0]?.content?.parts?.[0]?.text || 'কোনো উত্তর পাওয়া যায়নি।';
+            
+            chatBox.innerHTML += `<div class="ai-msg"><strong>Gemini Assistant:</strong> ${reply}</div>`;
+            chatBox.scrollTop = chatBox.scrollHeight;
+        } catch (error) {
+            chatBox.innerHTML += `<div class="ai-msg text-danger"><strong>ত্রুটি:</strong> Gemini API কানেকশনে সমস্যা হয়েছে।</div>`;
+        }
     }
 
     function handleNewTrx(e) {
@@ -291,7 +379,6 @@
 
         ledgerHistory.unshift({ date: dateStr, desc: desc, dr: dr, cr: cr, bal: currentBalance });
 
-        // Save to LocalStorage
         localStorage.setItem('master_balance', currentBalance);
         localStorage.setItem('master_ledger', JSON.stringify(ledgerHistory));
 
