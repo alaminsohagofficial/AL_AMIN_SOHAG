@@ -1,16 +1,9 @@
-# ==========================================
-# UNIFIED GLOBAL MASTER ENTERPRISE DASHBOARD
-# Owner & Managing Director: MD. AL AMIN SOHAG
-# Organization: Salsabilah Amin Empires Ltd.
-# ==========================================
-
 class MasterEnterpriseDashboard:
     def __init__(self):
         self.owner = "MD. AL AMIN SOHAG"
         self.title = "Managing Director"
         self.company = "Salsabilah Amin Empires Ltd."
         
-        # Single Source of Truth (No Duplication)
         self.master_metrics = {
             "Total Portfolio Value": "৳ ২২,২০৪.৮৮ কোটি",
             "Closing Balance (CR)": "৳ ১,৯২,১৬,১৪৮.০০ (SR Electronics Park)",
@@ -60,7 +53,6 @@ class MasterEnterpriseDashboard:
         print(" Status: 100% Reconciled. Single Instance Active.")
         print("==================================================")
 
-# Execute Single Instance Dashboard
 if __name__ == "__main__":
     dashboard = MasterEnterpriseDashboard()
-    dashboard.render_dashboard()।
+    dashboard.render_dashboard()
