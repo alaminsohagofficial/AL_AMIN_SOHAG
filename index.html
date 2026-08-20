@@ -41,26 +41,26 @@ class MasterEnterpriseDashboard:
         }
 
     def render_dashboard(self):
-        print(f"==================================================")
+        print("==================================================")
         print(f" ENTERPRISE MASTER PORTAL: {self.owner}")
         print(f" Status: Production Live | {self.company}")
-        print(f"==================================================\n")
+        print("==================================================\n")
         
         print("--- [ FINANCIAL & ASSET METRICS ] ---")
         for metric, value in self.master_metrics.items():
             print(f" • {metric}: {value}")
             
-        print(f"\n--- [ GLOBAL ECOSYSTEM & ASSETS ] ---")
+        print("\n--- [ GLOBAL ECOSYSTEM & ASSETS ] ---")
         for category, details in self.ecosystem_assets.items():
             print(f"\n [+] {category}:")
             for key, val in details.items():
                 print(f"     - {key}: {val}")
                 
-        print(f"\n==================================================")
-        print(f" Status: 100% Reconciled. Single Instance Active.")
-        print(f"==================================================")
+        print("\n==================================================")
+        print(" Status: 100% Reconciled. Single Instance Active.")
+        print("==================================================")
 
 # Execute Single Instance Dashboard
 if __name__ == "__main__":
     dashboard = MasterEnterpriseDashboard()
-    dashboard.render_dashboard()
+    dashboard.render_dashboard()।
