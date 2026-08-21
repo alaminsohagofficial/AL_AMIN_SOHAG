@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>এন্টারপ্রাইজ মাস্টার ড্যাশবোর্ড - আল আমিন সোহাগ | Gemini AI ও সেন্ট্রাল সিবিএস</title>
+    <title>মাস্টার ড্যাশবোর্ড - আল আমিন সোহাগ | Gemini AI ও আর্থ কোর সিস্টেম</title>
     
     <!-- Bootstrap 5 CSS & FontAwesome Icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -13,17 +13,17 @@
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap');
         
         body { 
-            background-color: #f1f5f9; 
+            background-color: #0b0f19; 
             font-family: 'Inter', 'Noto Sans Bengali', sans-serif;
-            color: #334155;
+            color: #e2e8f0;
             overflow-x: hidden;
         }
         
         .sidebar { 
             min-height: 100vh; 
-            background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%); 
+            background: linear-gradient(180deg, #0f172a 0%, #020617 100%); 
             color: #fff;
-            box-shadow: 4px 0 15px rgba(0,0,0,0.05);
+            border-right: 1px solid #1e293b;
         }
         .sidebar .nav-link { 
             color: #94a3b8; 
@@ -47,29 +47,30 @@
             background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); 
             color: white; 
             border-radius: 20px; 
-            box-shadow: 0 15px 30px rgba(15, 23, 42, 0.25);
+            border: 1px solid #334155;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
         }
         
         .card-custom { 
-            border: none; 
+            border: 1px solid #1e293b; 
             border-radius: 16px; 
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); 
-            background: #ffffff;
+            background: #111827;
+            color: #f8fafc;
         }
 
         .ai-chat-box {
-            background-color: #0f172a;
+            background-color: #030712;
             border-radius: 16px;
             padding: 16px;
-            border: 1px solid #334155;
+            border: 1px solid #1f2937;
             color: #f8fafc;
             min-height: 250px;
-            max-height: 400px;
+            max-height: 380px;
             overflow-y: auto;
         }
 
         .ai-msg {
-            background-color: #1e293b;
+            background-color: #111827;
             border-left: 4px solid #38bdf8;
             padding: 10px 14px;
             border-radius: 8px;
@@ -84,6 +85,14 @@
             margin-bottom: 10px;
             font-size: 0.9rem;
             text-align: right;
+            color: white;
+        }
+
+        .table-dark-custom {
+            --bs-table-bg: #111827;
+            --bs-table-striped-bg: #1f2937;
+            --bs-table-border-color: #374151;
+            color: #f3f4f6;
         }
     </style>
 </head>
@@ -95,12 +104,12 @@
         <div class="col-md-3 col-lg-2 sidebar p-3 d-flex flex-column justify-content-between">
             <div>
                 <div class="d-flex align-items-center gap-2 mb-4 px-1 mt-2">
-                    <div class="bg-white rounded-circle p-2 d-inline-flex align-items-center justify-content-center">
-                        <i class="fa-solid fa-building-shield fs-4 text-dark"></i>
+                    <div class="bg-primary bg-opacity-20 text-info rounded-circle p-2 d-inline-flex align-items-center justify-content-center">
+                        <i class="fa-solid fa-atom fs-4"></i>
                     </div>
                     <div>
                         <h5 class="fw-bold mb-0 text-white" style="font-size: 1.05rem;">সুবাহ এন্টারপ্রাইজ</h5>
-                        <small class="text-info font-monospace d-block" style="font-size: 0.68rem;">GEMINI AI MASTER CBS</small>
+                        <small class="text-info font-monospace d-block" style="font-size: 0.68rem;">GEMINI CORE ENGINE</small>
                     </div>
                 </div>
 
@@ -108,6 +117,11 @@
                     <li class="nav-item">
                         <a class="nav-link active" onclick="showSection('dashboard', this)">
                             <i class="fa-solid fa-chart-pie me-2"></i>মাস্টার ড্যাশবোর্ড
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" onclick="showSection('earth-core', this)">
+                            <i class="fa-solid fa-earth-americas me-2"></i>পৃথিবীর সেন্ট্রাল কোর
                         </a>
                     </li>
                     <li class="nav-item">
@@ -128,13 +142,13 @@
                 </ul>
             </div>
 
-            <div class="p-3 bg-dark bg-opacity-50 rounded-4 text-center border border-secondary border-opacity-25 mb-2">
+            <div class="p-3 bg-dark bg-opacity-75 rounded-4 text-center border border-secondary border-opacity-25 mb-2">
                 <div class="d-flex align-items-center justify-content-center gap-2 mb-1">
                     <span class="spinner-grow spinner-grow-sm text-success" role="status"></span>
-                    <small class="text-light fw-bold">Gemini AI সিঙ্ক লাইভ</small>
+                    <small class="text-light fw-bold">Gemini & Core Sync</small>
                 </div>
                 <div class="small text-muted font-monospace" style="font-size: 0.72rem;">
-                    Sync Mode: Real-time API<br>
+                    Sync Status: Active<br>
                     State: 100% Persisted
                 </div>
             </div>
@@ -147,9 +161,9 @@
             <div id="sec-dashboard" class="app-sec">
                 <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4 gap-2">
                     <div>
-                        <h4 class="fw-bold text-dark mb-1">সমন্বিত মাস্টার ট্রেজারি ড্যাশবোর্ড</h4>
+                        <h4 class="fw-bold text-white mb-1">সমন্বিত মাস্টার ট্রেজারি ও অপারেশনস</h4>
                         <span class="text-secondary small">
-                            <i class="fa-solid fa-user-tie me-1"></i> ব্যবস্থাপনা পরিচালক: <strong>মো. আল আমিন সোহাগ</strong>
+                            <i class="fa-solid fa-user-tie me-1"></i> স্বত্বাধিকারী / এমডি: <strong>মো. আল আমিন সোহাগ</strong>
                         </span>
                     </div>
                     <div>
@@ -159,12 +173,12 @@
                     </div>
                 </div>
 
-                <div class="card balance-card p-4 p-md-5 mb-4 border-0">
+                <div class="card balance-card p-4 p-md-5 mb-4">
                     <div class="row align-items-center">
-                        <div class="col-lg-7">
-                            <span class="badge bg-white bg-opacity-20 text-white rounded-pill px-3 py-1 mb-2">মোট সমন্বিত স্থিতি (Total Equity)</span>
+                        <div class="col-lg-8">
+                            <span class="badge bg-primary bg-opacity-25 text-info border border-info border-opacity-25 rounded-pill px-3 py-1 mb-2">মোট সমন্বিত স্থিতি (Total Equity)</span>
                             <h1 class="display-4 fw-bold my-2 text-white" id="liveBalanceDisplay">৳ 1,50,01,213.00</h1>
-                            <p class="mb-0 text-white opacity-95">ডিপোজিট অ্যাকাউন্ট (DBBL): <strong class="text-warning">7017511802593</strong></p>
+                            <p class="mb-0 text-light opacity-75">প্রধান সিবিএস অ্যাকাউন্ট (DBBL): <strong class="text-warning">7017511802593</strong></p>
                         </div>
                     </div>
                 </div>
@@ -173,47 +187,103 @@
                     <div class="col-md-6">
                         <div class="card card-custom p-4 h-100 border-start border-4 border-primary">
                             <div class="d-flex justify-content-between align-items-start mb-2">
-                                <h5 class="fw-bold text-dark"><i class="fa-solid fa-building-columns text-primary me-2"></i>ডাচ-বাংলা ব্যাংক (DBBL)</h5>
-                                <span class="badge bg-success rounded-pill">সেটেল্ড</span>
+                                <h5 class="fw-bold text-white"><i class="fa-solid fa-building-columns text-primary me-2"></i>ডাচ-বাংলা ব্যাংক (DBBL)</h5>
+                                <span class="badge bg-success">সেটেল্ড</span>
                             </div>
-                            <p class="text-muted small mb-1">গুগল রেমিট্যান্স (FT26187GOOG9999)</p>
-                            <h4 class="fw-bold text-primary mb-0">৳ 2,00,00,000.00</h4>
+                            <p class="text-secondary small mb-1">গুগল রেমিট্যান্স ট্র্যাকিং (FT26187GOOG9999)</p>
+                            <h4 class="fw-bold text-info mb-0">৳ 2,00,00,000.00</h4>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="card card-custom p-4 h-100 border-start border-4 border-success">
                             <div class="d-flex justify-content-between align-items-start mb-2">
-                                <h5 class="fw-bold text-dark"><i class="fa-solid fa-building-columns text-success me-2"></i>সোনালী ব্যাংক পিএলসি</h5>
-                                <span class="badge bg-primary rounded-pill">ক্লিয়ার্ড</span>
+                                <h5 class="fw-bold text-white"><i class="fa-solid fa-building-columns text-success me-2"></i>সোনালী ব্যাংক পিএলসি</h5>
+                                <span class="badge bg-primary">ক্লিয়ার্ড</span>
                             </div>
-                            <p class="text-muted small mb-1">বাটারফ্লাই মার্কেটিং সেটেলমেন্ট (RTGS)</p>
+                            <p class="text-secondary small mb-1">বাটারফ্লাই মার্কেটিং লিমিটেড সেটেলমেন্ট (RTGS)</p>
                             <h4 class="fw-bold text-success mb-0">৳ 1,04,00,000.00</h4>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- সেকশন ২: জেমিনি এআই কনসোল -->
+            <!-- সেকশন ২: পৃথিবীর সেন্ট্রাল কোর ইন্টিগ্রেশন -->
+            <div id="sec-earth-core" class="app-sec" style="display:none;">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="fw-bold text-white mb-0">
+                        <i class="fa-solid fa-earth-americas text-warning me-2"></i>পৃথিবীর সেন্ট্রাল কোর ও জিও-ম্যাগনেটিক এআই টেলিমেট্রি
+                    </h4>
+                    <span class="badge bg-danger rounded-pill px-3 py-2">কোর স্ট্যাটাস: ডায়নামিক সক্রিয়</span>
+                </div>
+
+                <div class="row g-3 mb-4">
+                    <div class="col-md-3">
+                        <div class="card card-custom p-3 border-start border-4 border-danger">
+                            <small class="text-secondary text-uppercase fw-bold">কোর তাপমাত্রা</small>
+                            <h4 class="fw-bold text-danger mb-0 mt-1">~৬,০০০°C</h4>
+                            <small class="text-muted">সূর্যপৃষ্ঠের তাপমাত্রার সমতুল্য</small>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card card-custom p-3 border-start border-4 border-warning">
+                            <small class="text-secondary text-uppercase fw-bold">কেন্দ্রভাগের গভীরতা</small>
+                            <h4 class="fw-bold text-warning mb-0 mt-1">২,৯০০ - ৬,৩৭০ কিমি</h4>
+                            <small class="text-muted">বহিঃকোর ও কঠিন অন্তঃকোর</small>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card card-custom p-3 border-start border-4 border-info">
+                            <small class="text-secondary text-uppercase fw-bold">চৌম্বক ক্ষেত্র তীব্রতা</small>
+                            <h4 class="fw-bold text-info mb-0 mt-1">২৫ - ৬৫ µT</h4>
+                            <small class="text-muted">সৌর বিকিরণ সুরক্ষা সক্রিয়</small>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card card-custom p-3 border-start border-4 border-success">
+                            <small class="text-secondary text-uppercase fw-bold">কোর মেটাল ভ্যালুয়েশন</small>
+                            <h4 class="fw-bold text-success mb-0 mt-1">অমূল্য ($10¹⁷+)</h4>
+                            <small class="text-muted">লোহা, নিকেল, সোনা ও প্ল্যাটিনাম</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card card-custom p-4 bg-dark">
+                    <h5 class="fw-bold text-warning mb-3">
+                        <i class="fa-solid fa-microchip me-2"></i>Gemini Core & Planetary Telemetry Sync
+                    </h5>
+                    <div class="p-3 bg-black rounded-3 mb-3 font-monospace text-light border border-secondary border-opacity-25" style="min-height: 120px; font-size: 0.9rem;" id="coreAiStatus">
+                        [SYSTEM READY]: Earth Core Telemetry Bridge Initialized.<br>
+                        [TELEMETRY]: Magnetic Shielding Stable | Geodynamo Operating at Normal State.
+                    </div>
+                    <div>
+                        <button onclick="analyzeEarthCore()" class="btn btn-warning fw-bold text-dark px-4 py-2">
+                            <i class="fa-solid fa-brain me-1"></i> কোরের বর্তমান অবস্থা এআই দিয়ে বিশ্লেষণ করুন
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- সেকশন ৩: জেমিনি এআই কনসোল -->
             <div id="sec-ai-console" class="app-sec" style="display:none;">
-                <h4 class="fw-bold text-dark mb-3"><i class="fa-solid fa-robot text-primary me-2"></i>জেমিনি এআই রিয়েল-টাইম ট্র্যাকিং কনসোল</h4>
-                <div class="card card-custom p-4 bg-white mb-3">
+                <h4 class="fw-bold text-white mb-3"><i class="fa-solid fa-robot text-info me-2"></i>জেমিনি এআই রিয়েল-টাইম ট্র্যাকিং কনসোল</h4>
+                <div class="card card-custom p-4 mb-3">
                     <div class="row g-2 mb-3">
                         <div class="col-md-9">
-                            <input type="password" id="geminiApiKey" class="form-control font-monospace" placeholder="আপনার Gemini API Key এখানে দিন (ব্রাউজারে সেভ থাকবে)">
+                            <input type="password" id="geminiApiKey" class="form-control bg-dark text-white border-secondary font-monospace" placeholder="আপনার Gemini API Key দিন (ব্রাউজারে সেভ থাকবে)">
                         </div>
                         <div class="col-md-3">
-                            <button onclick="saveApiKey()" class="btn btn-dark w-100 fw-bold">API Key সংরক্ষণ</button>
+                            <button onclick="saveApiKey()" class="btn btn-info w-100 fw-bold">API Key সংরক্ষণ</button>
                         </div>
                     </div>
                     
                     <div class="ai-chat-box mb-3" id="aiChatContainer">
                         <div class="ai-msg">
-                            <strong>Gemini Assistant:</strong> স্বাগতম সোহাগ ভাই। আমি আপনার ড্যাশবোর্ড ও মাস্টার লেজারের সাথে সংযুক্ত। যেকোনো আর্থিক বিশ্লেষণ বা অডিটের জন্য প্রশ্ন করুন।
+                            <strong>Gemini Assistant:</strong> স্বাগতম সোহাগ ভাই। আমি আপনার ড্যাশবোর্ড, ট্রেজারি লেজার এবং আর্থ কোর টেলিমেট্রির সাথে সংযুক্ত। যেকোনো বিশ্লেষণের জন্য নির্দেশ দিন।
                         </div>
                     </div>
 
                     <div class="input-group">
-                        <input type="text" id="aiUserPrompt" class="form-control" placeholder="জেমিনিকে নির্দেশ দিন (যেমন: বর্তমান ব্যালেন্স বিশ্লেষণ করো)..." onkeypress="if(event.key === 'Enter') sendToGemini()">
+                        <input type="text" id="aiUserPrompt" class="form-control bg-dark text-white border-secondary" placeholder="জেমিনিকে নির্দেশ দিন (যেমন: বর্তমান ব্যালেন্স ও কোর স্ট্যাটাস বিশ্লেষণ করো)..." onkeypress="if(event.key === 'Enter') sendToGemini()">
                         <button class="btn btn-primary px-4 fw-bold" onclick="sendToGemini()">
                             <i class="fa-solid fa-paper-plane me-1"></i> পাঠান
                         </button>
@@ -221,26 +291,26 @@
                 </div>
             </div>
 
-            <!-- সেকশন ৩: লেনদেন এন্ট্রি -->
+            <!-- সেকশন ৪: লেনদেন এন্ট্রি -->
             <div id="sec-transfer" class="app-sec" style="display:none;">
-                <h4 class="fw-bold text-dark mb-3"><i class="fa-solid fa-money-bill-transfer text-primary me-2"></i>নতুন লেনদেন এন্ট্রি ও ইনস্ট্যান্ট সিঙ্ক</h4>
-                <div class="card card-custom p-4 bg-white">
+                <h4 class="fw-bold text-white mb-3"><i class="fa-solid fa-money-bill-transfer text-primary me-2"></i>নতুন লেনদেন এন্ট্রি ও ইনস্ট্যান্ট সিঙ্ক</h4>
+                <div class="card card-custom p-4">
                     <form id="trxForm" onsubmit="handleNewTrx(event)">
                         <div class="row g-3 mb-3">
                             <div class="col-md-6">
-                                <label class="form-label fw-semibold">লেনদেনের বিবরণ</label>
-                                <input type="text" id="trxDesc" class="form-control" placeholder="যেমন: নতুন ডিপোজিট বা লোন সমন্বয়" required>
+                                <label class="form-label fw-semibold text-light">লেনদেনের বিবরণ</label>
+                                <input type="text" id="trxDesc" class="form-control bg-dark text-white border-secondary" placeholder="যেমন: নতুন ডিপোজিট বা ইনভয়েস সংগ্রহ" required>
                             </div>
                             <div class="col-md-3">
-                                <label class="form-label fw-semibold">লেনদেনের ধরন</label>
-                                <select id="trxType" class="form-select" required>
+                                <label class="form-label fw-semibold text-light">লেনদেনের ধরন</label>
+                                <select id="trxType" class="form-select bg-dark text-white border-secondary" required>
                                     <option value="CR">ক্রেডিট (+) বৃদ্ধি</option>
                                     <option value="DR">ডেবিট (-) কর্তন</option>
                                 </select>
                             </div>
                             <div class="col-md-3">
-                                <label class="form-label fw-semibold">টাকার পরিমাণ (BDT)</label>
-                                <input type="number" id="trxAmount" class="form-control font-monospace fw-bold" placeholder="0.00" min="1" required>
+                                <label class="form-label fw-semibold text-light">টাকার পরিমাণ (BDT)</label>
+                                <input type="number" id="trxAmount" class="form-control bg-dark text-white border-secondary font-monospace fw-bold" placeholder="0.00" min="1" required>
                             </div>
                         </div>
                         <button type="submit" class="btn btn-primary px-4 py-2 fw-bold rounded-3">
@@ -250,22 +320,24 @@
                 </div>
             </div>
 
-            <!-- সেকশন ৪: সমন্বিত লেজার -->
+            <!-- সেকশন ৫: সমন্বিত লেজার -->
             <div id="sec-statement" class="app-sec" style="display:none;">
-                <h4 class="fw-bold text-dark mb-3">সমন্বিত মাস্টার লেজার (Persisted State)</h4>
-                <div class="card card-custom p-3 bg-white">
-                    <table class="table table-hover align-middle mb-0">
-                        <thead class="table-light">
-                            <tr>
-                                <th>তারিখ</th>
-                                <th>বিবরণ</th>
-                                <th class="text-end">ডেবিট (-)</th>
-                                <th class="text-end">ক্রেডিট (+)</th>
-                                <th class="text-end">অবশিষ্ট স্থিতি</th>
-                            </tr>
-                        </thead>
-                        <tbody id="ledgerTableBody"></tbody>
-                    </table>
+                <h4 class="fw-bold text-white mb-3">সমন্বিত মাস্টার লেজার (Persisted State)</h4>
+                <div class="card card-custom p-3">
+                    <div class="table-responsive">
+                        <table class="table table-dark-custom table-hover align-middle mb-0">
+                            <thead>
+                                <tr class="text-secondary">
+                                    <th>তারিখ</th>
+                                    <th>বিবরণ</th>
+                                    <th class="text-end">ডেবিট (-)</th>
+                                    <th class="text-end">ক্রেডিট (+)</th>
+                                    <th class="text-end">অবশিষ্ট স্থিতি</th>
+                                </tr>
+                            </thead>
+                            <tbody id="ledgerTableBody"></tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
 
@@ -298,9 +370,9 @@
             tr.innerHTML = `
                 <td>${item.date}</td>
                 <td>${item.desc}</td>
-                <td class="text-end ${item.dr > 0 ? 'text-danger fw-bold' : 'text-muted'}">${item.dr > 0 ? formatBDT(item.dr) : '-'}</td>
-                <td class="text-end ${item.cr > 0 ? 'text-success fw-bold' : 'text-muted'}">${item.cr > 0 ? formatBDT(item.cr) : '-'}</td>
-                <td class="text-end fw-bold">${formatBDT(item.bal)} Cr</td>
+                <td class="text-end ${item.dr > 0 ? 'text-danger fw-bold' : 'text-secondary'}">${item.dr > 0 ? formatBDT(item.dr) : '-'}</td>
+                <td class="text-end ${item.cr > 0 ? 'text-success fw-bold' : 'text-secondary'}">${item.cr > 0 ? formatBDT(item.cr) : '-'}</td>
+                <td class="text-end fw-bold text-info">${formatBDT(item.bal)} Cr</td>
             `;
             tbody.appendChild(tr);
         });
@@ -333,10 +405,10 @@
         promptInput.value = '';
 
         const contextPrompt = `
-Context: Master Ledger Balance is ${currentBalance} BDT.
+Context: Master Ledger Balance is ${currentBalance} BDT. MD: Md. Al Amin Sohag.
 Recent Transactions: ${JSON.stringify(ledgerHistory.slice(0, 3))}
 User Request: ${userText}
-Respond concisely in Bengali as Master ERP & Treasury Assistant.`;
+Respond concisely in Bengali as Master ERP, Planetary & Treasury Assistant.`;
 
         try {
             const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
@@ -353,7 +425,45 @@ Respond concisely in Bengali as Master ERP & Treasury Assistant.`;
             chatBox.innerHTML += `<div class="ai-msg"><strong>Gemini Assistant:</strong> ${reply}</div>`;
             chatBox.scrollTop = chatBox.scrollHeight;
         } catch (error) {
-            chatBox.innerHTML += `<div class="ai-msg text-danger"><strong>ত্রুটি:</strong> Gemini API কানেকশনে সমস্যা হয়েছে।</div>`;
+            chatBox.innerHTML += `<div class="ai-msg text-danger"><strong>ত্রুটি:</strong> Gemini API কানেকশনে সমস্যা হয়েছে। API Key যাচাই করুন।</div>`;
+        }
+    }
+
+    async function analyzeEarthCore() {
+        const apiKey = localStorage.getItem('gemini_api_key') || document.getElementById('geminiApiKey')?.value.trim();
+        const statusBox = document.getElementById('coreAiStatus');
+
+        if (!apiKey) {
+            alert('দয়া করে প্রথমে জেমিনি এআই কনসোল ট্যাবে গিয়ে Gemini API Key সেট করুন!');
+            return;
+        }
+
+        statusBox.innerHTML = '<span class="text-warning">[AI TELEMETRY] পৃথিবীর সেন্ট্রাল কোরের ডেটা এবং জিও-ম্যাগনেটিক স্ট্যাটাস বিশ্লেষণ করা হচ্ছে...</span>';
+
+        const corePrompt = `
+You are the Planetary Core Telemetry & Earth System AI for MD. AL AMIN SOHAG's central dashboard.
+Earth Core Parameters:
+- Inner/Outer Core Temp: ~6,000°C
+- Depth: 2,900 km to 6,370 km
+- Composition: Liquid Iron-Nickel Outer Core, Solid Inner Core, Precious Heavy Metals
+- Function: Generates Earth's Magnetosphere protecting against solar radiation.
+
+Provide a concise 3-sentence scientific status update in Bengali explaining how the core's geodynamo is keeping the planetary ecosystem stable and shielded right now.`;
+
+        try {
+            const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    contents: [{ parts: [{ text: corePrompt }] }]
+                })
+            });
+
+            const data = await response.json();
+            const reply = data.candidates?.[0]?.content?.parts?.[0]?.text || 'টেলিমেট্রি ডেটা প্রক্রিয়াকরণে ব্যর্থ হয়েছে।';
+            statusBox.innerHTML = `<span class="text-success">[AI CORE UPDATE]:</span>\n\n${reply}`;
+        } catch (error) {
+            statusBox.innerHTML = '<span class="text-danger">[ERROR]: Gemini API কানেকশনে সমস্যা হয়েছে।</span>';
         }
     }
 
